@@ -1,0 +1,2079 @@
+/* Base styles and reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #95a5ef;
+    --primary-dark: #6a7dd1; /* darker version of theme color */
+    --primary-darker: #4a5db0; /* even darker version */
+    --primary-light: #b0bdff; /* lighter version */
+    --dark-bg: #0a0c14; /* darker background */
+    --darker-bg: #050609; /* even darker background */
+    --text-color: #ffffff;
+    --text-color-muted: #a4a9c1;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Updated Navigation styles */
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav.container {
+    background-color: rgba(15, 17, 23, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    width: auto;
+    max-width: 90%;
+    padding: 12px 30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(149, 165, 239, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjust logo and links for new nav style */
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-right: 20px;
+}
+
+.logo-img {
+    height: 32px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    padding: 0 10px;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    background-color: rgba(149, 165, 239, 0.05);
+}
+
+/* Add active state for nav links */
+.nav-link.active {
+    background-color: rgba(149, 165, 239, 0.1);
+    color: var(--primary-light);
+}
+
+/* Enhanced Responsive Navigation */
+
+/* Add hamburger menu icon for mobile */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+/* Tablet adjustments (smaller nav items) */
+@media (max-width: 992px) {
+    nav.container {
+        padding: 10px 20px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+    }
+}
+
+/* Mobile navigation adjustments */
+@media (max-width: 768px) {
+    nav.container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 12px 20px;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 250px;
+        height: 100vh;
+        flex-direction: column;
+        background: rgba(10, 12, 20, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 80px 30px 30px;
+        transition: right 0.3s ease;
+        justify-content: flex-start;
+        align-items: flex-start;
+        z-index: 100;
+        border-left: 1px solid rgba(149, 165, 239, 0.1);
+        overflow-y: auto;
+        visibility: hidden;
+    }
+    
+    .nav-links.active {
+        right: 0;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 12px 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(149, 165, 239, 0.05);
+    }
+    
+    /* Transform hamburger to X when menu is open */
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+    
+    /* Overlay for mobile menu */
+    .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+    }
+    
+    .menu-overlay.active {
+        display: block;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    nav.container {
+        padding: 10px 15px;
+        border-radius: 15px;
+        max-width: 95%;
+    }
+    
+    .logo {
+        font-size: 1.1rem;
+    }
+    
+    .logo-img {
+        height: 28px;
+    }
+    
+    .nav-links {
+        width: 80%;
+        max-width: 280px;
+    }
+}
+
+/* Adjust z-index ordering for hero section layers */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #040510; /* Dark base color */
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+}
+
+/* Background image layer - lowest z-index */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('uploads/imgs/p1.png');
+    background-size: 75% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0; /* Kept as lowest layer */
+}
+
+/* Gradient overlay layer - middle z-index */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(13, 15, 55, 0.9), rgba(0, 0, 0, 0.95));
+    z-index: 1; /* Kept as middle layer */
+}
+
+/* Grid pattern - now above gradient */
+.interactive-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Keep this value, it's already correct */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Content above all background elements */
+.hero-container {
+    position: relative;
+    z-index: 3; /* Already correct */
+}
+
+/* Transition effect on top */
+.hero-transition {
+    z-index: 4; /* Already correct */
+}
+
+/* Enhanced gradient background for hero content block */
+.hero-content-block {
+    width: auto;
+    max-width: 700px;
+    padding: 60px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(149, 165, 239, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(13, 15, 35, 0.6) 0%, 
+        rgba(25, 30, 70, 0.4) 50%,
+        rgba(13, 15, 35, 0.6) 100%);
+    backdrop-filter: blur(2px);
+  
+    box-shadow: 0 0 40px rgba(13, 15, 55, 0.5);
+}
+
+.hero-content-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(149, 165, 239, 0.08) 0%, transparent 70%);
+    z-index: -1;
+    border-radius: 20px;
+}
+
+/* Add subtle animation to the gradient */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero-content-block {
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+}
+
+/* Adjust button group for hero section */
+.hero-content-block .button-group {
+    margin-top: 50px;
+}
+
+/* Responsive adjustments for hero */
+@media (max-width: 768px) {
+    .hero-content-block {
+        width: 100%;
+        padding: 40px 20px;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .gradient-text {
+        font-size: 3.5rem;
+    }
+}
+
+.gradient-text {
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(to bottom, #ffffff, var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    max-width: 350px;
+    margin: 0 auto 60px;
+    color: var(--primary-color);
+}
+
+/* Updated Button styles with gradient borders */
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.gradient-btn {
+    display: inline-block;
+    padding: 1px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-inner {
+    border-radius: 9px;
+    padding: 13px 27px;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+/* Get Started button - slightly rounded corners */
+.get-started .btn-inner {
+    background: linear-gradient(to bottom, var(--darker-bg), #22283d);
+    border-radius: 10px;
+    border-left: 1px solid rgba(149, 165, 239, 0.1);
+    border-top: 1px solid rgba(149, 165, 239, 0.1);
+}
+
+/* Documentation button - slightly different gradient */
+.docs .btn-inner {
+    background: linear-gradient(to bottom, #131a2e, #131830);
+    border-radius: 10px;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Twitter button - inset shadow effect */
+.twitter .btn-inner {
+    background: linear-gradient(to bottom, #0e1323, #121728);
+    border-radius: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Telegram button - subtle light border on top */
+.telegram .btn-inner {
+    background: linear-gradient(to bottom, #12172b, #222a48);
+    border-radius: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Hover states for each button */
+.get-started:hover .btn-inner {
+    background: linear-gradient(to bottom, #080a13, #181d2d);
+}
+
+.docs:hover .btn-inner {
+    background: linear-gradient(to bottom, #090b15, #1a1f36);
+}
+
+.twitter:hover .btn-inner {
+    background: linear-gradient(to bottom, #0a0c17, #1c1f32);
+}
+
+.telegram:hover .btn-inner {
+    background: linear-gradient(to bottom, #0b0e19, #1e2138);
+}
+
+.gradient-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: opacity 0.3s;
+    opacity: 1;
+    border-radius: 9px;
+}
+
+/* Glossy effect */
+.gradient-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+    z-index: 1;
+    border-radius: 9px;
+}
+
+.gradient-btn:hover::after {
+    left: 100%;
+}
+
+.gradient-btn:hover {
+    transform: translateY(-2px);
+}
+
+.gradient-btn:hover .btn-inner {
+    background: linear-gradient(to bottom, #080a12, #181c2c);
+}
+
+/* Updated button gradients to use theme color variations */
+.get-started::before {
+    background: linear-gradient(45deg, #5a639f, var(--primary-dark));
+}
+
+.docs::before {
+    background: linear-gradient(45deg, var(--primary-dark), var(--primary-darker));
+}
+
+.twitter::before {
+    background: linear-gradient(45deg, var(--primary-darker), #5a639f);
+}
+
+.telegram::before {
+    background: linear-gradient(45deg, #7f89c9, #0d0f1d);
+}
+
+/* About section styles - updated background */
+.about {
+    background: radial-gradient(circle farthest-side at 50% 70%, #0d1029 5%, #070a14 60%, #050609 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle overlay pattern to match hero section style */
+.about::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 80% 20%, rgba(149, 165, 239, 0.05) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Ensure all content stays above the background gradient */
+.line-row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(149, 165, 239, 0.1);
+   
+}
+
+.line-row:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.empty-fill-block {
+    flex: 1;
+    position: relative;
+}
+
+.empty-fill-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(149, 165, 239, 0.1), transparent);
+}
+
+.empty-fill-block:last-child::after {
+    display: none;
+}
+
+.logo-block {
+    display: flex;
+    width: 668px;
+    justify-content: left;
+    margin-bottom: 0;
+    padding: 30px 50px;
+    position: relative;
+    border-left: 1px solid rgba(149, 165, 239, 0.1);
+    border-right: 1px solid rgba(149, 165, 239, 0.1);
+}
+
+.logo-block img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.about-text-block {
+    padding: 50px;
+    width: 668px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color-muted);
+    border-left: 1px solid rgba(149, 165, 239, 0.1);
+    border-right: 1px solid rgba(149, 165, 239, 0.1);
+    background: linear-gradient(to bottom, rgba(13, 15, 55, 0.1) 0%, rgba(13, 15, 55, 0.4) 100%);
+    position: relative;
+}
+
+/* Optional: Add a subtle glow effect behind the text block */
+.about-text-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at bottom center, rgba(149, 165, 239, 0.08) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.about-text-block p {
+    font-size: 2.2rem;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+}
+
+.about-text-block p:last-child {
+    margin-bottom: 0;
+}
+
+/* Heading block styles */
+.heading-block {
+    width: 668px;
+    height: 200px;
+    padding: 30px 50px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border-left: 1px solid rgba(149, 165, 239, 0.1);
+    border-right: 1px solid rgba(149, 165, 239, 0.1);
+}
+
+/* Unified heading styles for consistent gradient text effects */
+.heading-block h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, #ffffff, var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 2;
+}
+
+/* Remove tokenomics-heading specific styling that's now redundant */
+.tokenomics-heading {
+    margin-bottom: 0;
+    margin-top: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .line-row {
+        flex-direction: column;
+        padding: 0 20px 30px;
+        margin-bottom: 30px;
+    }
+    
+    .empty-fill-block::after {
+        display: none;
+    }
+    
+    .logo-block,
+    .about-text-block {
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(149, 165, 239, 0.1);
+        padding: 20px;
+        width: 100%;
+    }
+    
+    .line-row:last-child .about-text-block {
+        border-bottom: none;
+    }
+    
+    .heading-block,
+    .logo-block,
+    .about-text-block {
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(149, 165, 239, 0.1);
+        padding: 20px;
+        width: 100%;
+    }
+}
+
+/* Replace the decorative dots with square dots at border intersections */
+.about-text-block, .logo-block, .heading-block {
+    position: relative;
+}
+
+/* Remove previous rounded dots */
+.about-text-block::after, .logo-block::after {
+    display: none;
+}
+
+/* Create square intersection dots */
+.corner-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 0; /* Square shape */
+    opacity: 0.8;
+    z-index: 3;
+}
+
+/* Position dots at exact border intersections */
+.corner-dot.top-left {
+    top: -2px;
+    left: -2px;
+}
+
+.corner-dot.bottom-left {
+    bottom: -2px;
+    left: -2px;
+}
+
+.corner-dot.bottom-right {
+    bottom: -2px;
+    right: -2px;
+}
+
+.corner-dot.top-right {
+    top: -2px;
+    right: -2px;
+}
+
+/* Updated Features section with lighter centered background */
+.features {
+    padding: 150px 0 150px;
+    background: radial-gradient(circle at 50% 50%, 
+        rgba(30, 36, 102, 0.8) 0%, /* Less saturated center */
+        rgba(15, 19, 40, 0.9) 30%, /* Lighter mid-tone */
+        rgba(10, 12, 24, 1) 90%); /* Slightly lighter dark edge */
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Adjusted glow effect with lower saturation */
+.features-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Slightly wider glow */
+    height: 80%; /* Slightly taller glow */
+    background: radial-gradient(circle at center, rgba(149, 165, 239, 0.08) 0%, transparent 75%);
+    filter: blur(80px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Improved grid pattern with edge fade effect */
+.features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to right, rgba(149, 165, 239, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(149, 165, 239, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Add edge fade mask for grid */
+.features::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(5, 6, 9, 0.8) 90%, rgba(5, 6, 9, 1) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Ensure content stays above grid */
+.features > * {
+    position: relative;
+    z-index: 2;
+}
+
+.features-heading {
+    font-size: 3.5rem;
+    margin-bottom: 60px;
+    /* Using gradient text styling but with customized size */
+    background: linear-gradient(to bottom, #ffffff, var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+}
+
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Define the --angle custom property */
+@property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+/* Updated feature card with rotating conic gradient border */
+.feature-card {
+    position: relative;
+    border-radius: 10px;
+    background: transparent;
+    overflow: visible;
+    transition: transform 0.3s ease;
+    height: 100%;
+    padding: 1px; /* Space for the border */
+}
+
+/* Inner rotating gradient border */
+.feature-card::before, 
+.feature-card::after {
+    content: '';
+    position: absolute;
+    background: conic-gradient(from var(--angle), transparent 60%, var(--primary-color), transparent);
+    animation: spin 3s linear infinite;
+    border-radius: 10px; /* Slightly larger than the card content */
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+/* Outer glowing effect */
+.feature-card::after {
+    filter: blur(24px);
+    opacity: 0.35;
+    background: conic-gradient(from var(--angle), transparent 60%, rgba(149, 165, 239, 0.7), transparent);
+}
+
+/* Spin animation for the conic gradient */
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+    to {
+        --angle: 360deg;
+    }
+}
+
+/* Card content with centered alignment */
+.card-content {
+    padding: 30px;
+    background: linear-gradient(to bottom, #0d0f2d, #050610);
+    border-radius: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertical centering */
+    align-items: center; /* Horizontal centering */
+    position: relative;
+    z-index: 1;
+    text-align: center; /* Ensure text is centered too */
+}
+
+/* Updated icon box with improved rotating border */
+.icon-box {
+    position: relative;
+    padding: 1px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    overflow: hidden; /* Change from visible to hidden */
+}
+
+.icon-box::before {
+    content: '';
+    position: absolute;
+     top: -5%;
+    left: -5%;
+    width: 110%; /* Larger than container */
+    height: 110%; /* Larger than container */
+    background: var(--primary-color);
+    border-radius: 12px;
+    z-index: -1;
+    animation: rotate 6s linear infinite;
+    transform: translate(-50%, -50%); /* Center the element */
+}
+
+/* Lighter icon background using primary color */
+.card-icon {
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--primary-color), #040733); /* Start with primary color */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    background: linear-gradient(to bottom, #ffffff, var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color-muted);
+    flex-grow: 1;
+}
+
+/* Responsive layout */
+@media (max-width: 992px) {
+    .feature-cards {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .features {
+        padding: 70px 0 100px;
+    }
+    
+    .feature-cards {
+        padding: 40px 20px;
+        gap: 20px;
+    }
+    
+    .card-content {
+        padding: 25px;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* GPU Models Section */
+.gpu-models {
+    position: relative;
+    padding: 150px 0 0 0;
+    background: linear-gradient(to bottom, 
+        rgba(8, 9, 34, 0.8) 0%, 
+        rgba(12, 15, 35, 0.9) 50%, 
+        #070814 100%);
+    text-align: center;
+}
+
+/* Edge fade effect */
+.gpu-models::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(8, 10, 20, 0.8) 90%, rgba(8, 10, 20, 1) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gpu-heading {
+    font-size: 3.5rem;
+    margin-bottom: 60px;
+    background: linear-gradient(to bottom, #ffffff, var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 2;
+}
+
+.gpu-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  
+    position: relative;
+    z-index: 2;
+}
+
+.gpu-card {
+    position: relative;
+    border-radius: 14px;
+    background: rgba(17, 20, 46, 0.3);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    width: 420px;
+    border: 1px solid rgba(149, 165, 239, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.gpu-card:hover {
+    transform: translateY(-10px);
+}
+
+.gpu-header {
+    padding: 25px;
+    background: linear-gradient(to bottom, rgba(23, 27, 65, 0.8), rgba(20, 23, 50, 0.8));
+    border-bottom: 1px solid rgba(149, 165, 239, 0.1);
+    position: relative;
+}
+
+.gpu-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--primary-color);
+    color: #050610;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.gpu-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #ffffff, var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: left;
+    letter-spacing: -0.03em;
+}
+
+.gpu-specs {
+    padding: 25px;
+}
+
+.spec-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(149, 165, 239, 0.1);
+    text-align: left;
+}
+
+.spec-row:last-child {
+    border-bottom: none;
+}
+
+.spec-label {
+    width: 120px;
+    font-weight: 600;
+    color: var(--primary-light);
+    font-size: 0.95rem;
+}
+
+.spec-value {
+    flex: 1;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.gpu-footer {
+    padding: 25px;
+    background: rgba(14, 16, 38, 0.5);
+    border-top: 1px solid rgba(149, 165, 239, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rate {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.rent-button {
+    background: linear-gradient(45deg, var(--primary-darker), var(--primary-dark));
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rent-button:hover {
+    background: linear-gradient(45deg, var(--primary-dark), var(--primary-darker));
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .gpu-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .gpu-card {
+        width: 100%;
+        max-width: 480px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gpu-header h3 {
+        font-size: 1.6rem;
+    }
+    
+    .spec-row {
+        flex-direction: column;
+    }
+    
+    .spec-label {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+    
+    .gpu-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* Tokenomics Section */
+.tokenomics {
+    padding: 0;
+    background: radial-gradient(circle at 50% 50%, 
+        rgba(15, 18, 45, 0.8) 0%, 
+        rgba(10, 12, 30, 0.9) 50%, 
+        rgba(7, 8, 20, 1) 100%);
+    position: relative;
+}
+
+.tokenomics-heading {
+    font-size: 3.5rem;
+    margin-bottom: 0;
+    letter-spacing: -0.02em;
+}
+
+.tokenomics-stats-block {
+    width: 668px;
+    padding: 30px 40px;
+    position: relative;
+    border-left: 1px solid rgba(149, 165, 239, 0.1);
+    border-right: 1px solid rgba(149, 165, 239, 0.1);
+    background: linear-gradient(to bottom, rgba(13, 15, 55, 0.05) 0%, rgba(13, 15, 55, 0.2) 100%);
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.stats-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stats-label {
+    color: var(--primary-light);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.stats-value {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.tokenomics-text-block {
+    width: 668px;
+    padding: 50px 40px;
+    position: relative;
+    border-left: 1px solid rgba(149, 165, 239, 0.1);
+    border-right: 1px solid rgba(149, 165, 239, 0.1);
+    background: linear-gradient(to bottom, rgba(13, 15, 55, 0.05) 0%, rgba(13, 15, 55, 0.2) 100%);
+    text-align: left;
+}
+
+.tokenomics-text-block h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ffffff, var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+}
+
+.tokenomics-text-block p {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.tokenomics-list-heading {
+    font-weight: 600;
+    color: var(--primary-light);
+}
+
+.tokenomics-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tokenomics-list li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+.tokenomics-list li::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 16px;
+    height: 1px;
+    background: var(--primary-color);
+}
+
+.tokenomics-cta-block {
+    width: 668px;
+    padding: 40px;
+    position: relative;
+    border-left: 1px solid rgba(149, 165, 239, 0.1);
+    border-right: 1px solid rgba(149, 165, 239, 0.1);
+    background: linear-gradient(to bottom, rgba(13, 15, 55, 0.05) 0%, rgba(13, 15, 55, 0.2) 100%);
+    text-align: center;
+}
+
+.bot-cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: linear-gradient(45deg, var(--primary-darker), var(--primary-dark));
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.bot-cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, var(--primary-dark), var(--primary-color));
+}
+
+/* Responsive adjustments for tokenomics section */
+@media (max-width: 768px) {
+    .tokenomics-stats-block,
+    .tokenomics-text-block,
+    .tokenomics-cta-block {
+        width: 100%;
+        padding: 30px 20px;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .stats-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .tokenomics-heading {
+        font-size: 2.5rem;
+    }
+    
+    .tokenomics-text-block h3 {
+        font-size: 1.5rem;
+    }
+    
+    .bot-cta-button {
+        width: 100%;
+        padding: 15px 20px;
+    }
+}
+
+/* Update heading to ensure gradient styling */
+.tokenomics-text-block h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ffffff, var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+}
+
+/* Add container for the button inside text block */
+.text-button-container {
+    margin-top: 40px;
+    text-align: left;
+}
+
+/* Create a more subtle button style */
+.text-cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: rgba(20, 24, 60, 0.5);
+    border: 1px solid rgba(149, 165, 239, 0.2);
+    border-radius: 8px;
+    color: var(--primary-light);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.text-cta-button:hover {
+    background: rgba(30, 35, 80, 0.7);
+    border-color: rgba(149, 165, 239, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Add transition gradient between GPU and tokenomics sections */
+.section-transition {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, transparent 0%, rgba(7, 8, 20, 1) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 150px 0;
+    background: linear-gradient(to bottom, 
+        rgba(10, 12, 30, 0.9) 0%, 
+        rgba(7, 8, 20, 1) 100%);
+    position: relative;
+    text-align: center;
+}
+
+/* Grid pattern background */
+.faq::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to right, rgba(149, 165, 239, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(149, 165, 239, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Ensure content stays above grid */
+.faq-heading, .faq-description, .accordion-container {
+    position: relative;
+    z-index: 2;
+}
+
+.faq-heading {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.faq-description {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    color: var(--text-color-muted);
+    font-size: 1.1rem;
+}
+
+.accordion-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.accordion-item {
+    margin-bottom: 15px;
+    border: 1px solid rgba(149, 165, 239, 0.1);
+    border-radius: 10px;
+    background: rgba(15, 18, 45, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    border-color: rgba(149, 165, 239, 0.2);
+}
+
+.accordion-header {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(20, 24, 60, 0.3);
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(25, 30, 70, 0.4);
+}
+
+.accordion-item.active .accordion-header {
+    border-bottom: 1px solid rgba(149, 165, 239, 0.1);
+    background: rgba(30, 35, 80, 0.4);
+}
+
+.accordion-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin: 0;
+}
+
+.accordion-icon {
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+}
+
+/* Further improved accordion animations */
+.accordion-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 25px;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: 
+        max-height 0.2s cubic-bezier(0, 1, 0, 1),
+        opacity 0.1s ease,
+        transform 0.2s ease,
+        padding 0.2s ease;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 1000px;
+    opacity: 1;
+    padding: 25px;
+    transform: scaleY(1);
+    transition:
+        max-height 0.3s cubic-bezier(0.5, 0, 0.1, 1),
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        padding 0.2s ease;
+}
+
+.accordion-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.accordion-content ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.accordion-content li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .faq-heading {
+        font-size: 2.5rem;
+    }
+    
+    .accordion-header h3 {
+        font-size: 1rem;
+    }
+    
+    .accordion-header, 
+    .accordion-item.active .accordion-content {
+        padding: 20px;
+    }
+}
+
+/* Section transition for about section */
+.about-transition {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, transparent 0%, rgba(7, 8, 20, 1) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-transition {
+    position: absolute;
+    bottom: 0px !important;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(7, 8, 20, 1) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+
+
+/* Make about section position relative to anchor the transition */
+.about {
+    position: relative;
+}
+
+/* Unique styling for tokenomics heading block */
+.tokenomics-heading-block {
+    background: rgba(13, 15, 55, 0.2);
+    border-left: 1px solid rgba(149, 165, 239, 0.15);
+    border-right: 1px solid rgba(149, 165, 239, 0.15);
+    border-top: none;
+    border-bottom: 1px solid rgba(149, 165, 239, 0.15);
+
+    height: auto;
+    padding-bottom: 40px;
+}
+
+/* Adjust the tokenomics heading specific styles */
+.tokenomics-heading {
+    margin-bottom: 0;
+    background: linear-gradient(to right, #ffffff, var(--primary-light));
+    font-size: 3.2rem;
+}
+
+/* Pulsating grid background for hero section */
+.interactive-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Grid cells without CSS animation */
+.grid-cell {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(149, 165, 239, 0.03);
+    pointer-events: none;
+    transition: box-shadow 0.2s ease;
+}
+
+/* Remove pulsating animation class and keyframes */
+
+/* Ensure hero container stays above the grid */
+.hero-container {
+    position: relative;
+    z-index: 3;
+}
+
+/* Footer Styles */
+.site-footer {
+    background: linear-gradient(to bottom, #070a1e, #040510);
+    padding: 80px 0 40px;
+    position: relative;
+    border-top: 1px solid rgba(149, 165, 239, 0.1);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+}
+
+.footer-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.footer-logo-img {
+    height: 36px;
+    margin-right: 10px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-links-column h3 {
+    color: var(--primary-light);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-links-column h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 30px;
+    height: 2px;
+    background: rgba(149, 165, 239, 0.3);
+}
+
+.footer-links-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links-column li {
+    margin-bottom: 12px;
+}
+
+.footer-links-column a {
+    color: var(--text-color-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer-links-column a:hover {
+    color: var(--primary-color);
+}
+
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(to right, 
+        transparent 0%, 
+        rgba(149, 165, 239, 0.1) 20%, 
+        rgba(149, 165, 239, 0.1) 80%, 
+        transparent 100%);
+    margin-bottom: 30px;
+}
+
+/* 版权信息的新样式 */
+.copyright {
+    color: var(--text-color-muted);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-container {
+        padding: 0 20px;
+    }
+}
+
+/* Comprehensive responsive adjustments */
+
+/* Medium screens (tablets and small laptops) */
+@media (max-width: 992px) {
+    /* Feature cards - 2 columns instead of 4 */
+    .feature-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    /* GPU cards - slightly smaller */
+    .gpu-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    /* Reduce some paddings and margins */
+    .about-text-block, .tokenomics-text-block {
+        padding: 40px;
+    }
+    
+    /* Adjust heading sizes */
+    .gradient-text {
+        font-size: 4.5rem;
+    }
+    
+    /* Section headings for mobile */
+    .features-heading, .gpu-heading, .tokenomics-heading, .faq-heading {
+        font-size: 2.8rem;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    /* Refine existing mobile styles */
+    .hero-content-block {
+        padding: 40px 20px;
+        margin: 0 15px;
+    }
+    
+    /* Single column layouts for mobile */
+    .feature-cards, .gpu-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Reduce gradient text size further */
+    .gradient-text {
+        font-size: 3.5rem;
+        margin-bottom: 25px;
+    }
+    
+    /* Adjust hero subtitle for mobile */
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+    }
+    
+    /* Button group for mobile */
+    .button-group {
+        grid-template-columns: 1fr;
+        grid-gap: 15px;
+    }
+    
+    /* Section headings for mobile */
+    .features-heading, .gpu-heading, .tokenomics-heading, .faq-heading {
+        font-size: 2.5rem;
+        padding: 0 15px;
+    }
+    
+    /* Reduce padding in text blocks */
+    .about-text-block, .tokenomics-text-block {
+        padding: 30px 20px;
+    }
+    
+    /* Optimize animation grid for mobile performance */
+    .grid-cell {
+        width: 60px; /* Larger cells = fewer cells to render */
+        height: 60px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    /* Even smaller text and padding for very small screens */
+    .gradient-text {
+        font-size: 2.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    
+    
+    /* Full width elements */
+    .about-text-block, .tokenomics-text-block, .tokenomics-stats-block {
+        width: calc(100% - 30px);
+        margin: 0 15px;
+    }
+    
+    /* Further optimize grid for performance */
+    .grid-cell {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Reduce transition height */
+    .hero-transition, .about-transition, .section-transition {
+        height: 120px;
+    }
+    
+    /* Tighter paddings */
+    .about, .features, .gpu-models, .tokenomics, .faq {
+        padding: 60px 0 40px;
+    }
+}
+
+/* Enhanced Hero Section Responsiveness */
+
+/* Large screens (desktops) */
+@media (min-width: 1200px) {
+    .hero-content-block {
+        max-width: 800px;
+        padding: 70px;
+    }
+    
+    .hero::before {
+        background-size: 65% auto;
+    }
+}
+
+/* Medium screens (tablets and small laptops) */
+@media (max-width: 992px) {
+    .hero {
+        padding: 120px 0 60px;
+    }
+    
+    .hero-content-block {
+        max-width: 600px;
+        padding: 50px 40px;
+    }
+    
+    .hero::before {
+        background-size: 85% auto;
+    }
+    
+    .button-group {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+    }
+    
+   
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto;
+        padding: 100px 0 50px;
+    }
+    
+    .hero-content-block {
+        width: calc(100% - 30px);
+        max-width: 100%;
+        padding: 40px 25px;
+        margin: 0 15px;
+    }
+    
+    .hero::before {
+        background-size: 100% auto;
+    }
+    
+    .button-group {
+        grid-template-columns: 1fr;
+        grid-gap: 12px;
+    }
+    
+    .gradient-btn {
+        width: 100%;
+       
+    }
+    
+    .hero-transition {
+        height: 80px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .hero {
+        padding: 90px 0 40px;
+    }
+    
+    .hero-content-block {
+        padding: 30px 20px;
+    }
+    
+    .gradient-text {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+        padding: 0 10px;
+    }
+    
+    .gradient-btn {
+       
+        font-size: 0.9rem;
+    }
+    
+    .hero-transition {
+        height: 60px;
+    }
+    
+    /* Optimize grid for very small screens */
+    .grid-cell {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Enhanced About Section Responsiveness */
+
+/* Medium screens (tablets and small laptops) */
+@media (max-width: 992px) {
+    /* About section adjustments */
+    .about {
+        padding: 80px 0 60px;
+    }
+    
+    .line-row {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    
+    .empty-fill-block {
+        min-width: 20px;
+    }
+    
+    .logo-block {
+        padding: 30px;
+    }
+    
+    .logo-block img {
+        height: 80px;
+    }
+    
+    .about-text-block {
+        padding: 35px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    .about {
+        padding: 60px 0 40px;
+    }
+    
+    .line-row {
+        max-width: 95%;
+    }
+    
+    .empty-fill-block {
+        min-width: 10px;
+    }
+    
+    .heading-block {
+        padding: 15px 20px;
+    }
+    
+    .logo-block {
+        padding: 25px;
+    }
+    
+    .logo-block img {
+        height: 70px;
+    }
+    
+    .about-text-block {
+        padding: 25px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .about-text-block p {
+        margin-bottom: 15px;
+    }
+    
+    .about-transition {
+        height: 70px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .about {
+        padding: 50px 0 30px;
+    }
+    
+    .line-row {
+        max-width: 100%;
+        margin: 0 auto 15px;
+    }
+    
+    .empty-fill-block {
+        min-width: 5px;
+    }
+    
+    .logo-block {
+        padding: 20px;
+    }
+    
+    .logo-block img {
+        height: 60px;
+    }
+    
+    .about-text-block {
+        padding: 20px 15px;
+        font-size: 0.85rem;
+        width: calc(100% - 20px);
+    }
+    
+    .corner-dot {
+        width: 5px;
+        height: 5px;
+    }
+    
+    .about-transition {
+        height: 50px;
+    }
+}
+
+/* Responsive font size adjustments for about-text-block paragraphs */
+
+/* Desktop styles remain unchanged */
+
+/* Medium screens (tablets and small laptops) */
+@media (max-width: 992px) {
+    .about-text-block p {
+        font-size: 1.5rem; /* Slightly smaller than desktop */
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    .about-text-block p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .about-text-block p {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+} 
